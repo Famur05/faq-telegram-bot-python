@@ -1,3 +1,6 @@
+from csv import DictReader
+
+
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 import shutil, os, csv
@@ -16,7 +19,7 @@ csv_path = "./app/faq.csv"
 texts = []
 metadatas = []
 with open(csv_path, "r", encoding="utf-8") as f:
-    reader = csv.DictReader(f, delimiter="|")
+    reader: DictReader[str] = csv.DictReader(f, delimiter="|")
     for row in reader:
         question = (row.get("question") or "").strip()
         answer = (row.get("answer") or "").strip()

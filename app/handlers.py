@@ -34,8 +34,8 @@ async def cmd_start(message: Message):
 @router.message(Command("faq"))
 async def cmd_faq(message: Message):
     """Handle /faq command."""
-    parts = message.text.split(maxsplit=1)
-    query = parts[1].strip() if len(parts) > 1 else ""
+    parts: list[str] = message.text.split(maxsplit=1)
+    query: str = parts[1].strip() if len(parts) > 1 else ""
     
     if not query:
         await message.answer(
@@ -44,7 +44,7 @@ async def cmd_faq(message: Message):
         )
         return
     
-    results = await asyncio.to_thread(search_faq, query)
+    results: list[tuple[str, str]] = await asyncio.to_thread(search_faq, query)
     
     if not results:
         await message.answer(f"🤷 Не найдено подходящего ответа для запроса: {query}")
