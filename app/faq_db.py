@@ -11,7 +11,7 @@ from app.config import (
 
 embedding_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
 
-csv_path = "./faq.csv"
+csv_path = "./app/faq.csv"
 
 texts = []
 metadatas = []
@@ -37,6 +37,6 @@ vector_store = Chroma.from_texts(
 )
 
 if os.path.exists(CHROMA_FILE):
-    shutil.copy(CHROMA_FILE, "faq.db")
+    shutil.copy(CHROMA_FILE, "./app/faq.db")
 
 print("✅ База знаний успешно создана: faq.db (SQLite)")
