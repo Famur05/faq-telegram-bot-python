@@ -2,7 +2,6 @@ import os
 import asyncio
 from aiogram import Bot, Dispatcher
 import logging
-from app.handlers import router
 from app.config import (
     BOT_TOKEN,
     CHROMA_PERSIST_DIRECTORY,
@@ -20,6 +19,8 @@ async def main():
 
     bot = Bot(token=BOT_TOKEN)
     dp = Dispatcher()
+    # Импортирует маршрутизатор только после проверки существования хранилища Chroma, чтобы избежать побочных эффектов при импорте.
+    from app.handlers import router
     dp.include_router(router)
     print("✅ Бот запущен и готов к работе!")
     await dp.start_polling(bot)
