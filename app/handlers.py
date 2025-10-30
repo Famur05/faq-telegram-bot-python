@@ -56,7 +56,7 @@ async def cmd_faq(message: Message):
     
     response = f"📚 Результат поиска для: '{query}'\n\n"
     response += f"❓ Похожий вопрос: {results[0][0]}\n"
-    response += f"📝 Ответ: {results[0][1]}"
+    response += f"💬 Ответ: {results[0][1]}"
     
     await message.answer(response)
 
