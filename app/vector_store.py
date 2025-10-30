@@ -1,6 +1,4 @@
 from langchain_core.documents.base import Document
-
-
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from app.config import (
