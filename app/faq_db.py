@@ -12,10 +12,12 @@ from app.config import (
 )
 
 
+print("🔃 Подключение Эмбеддинг Модели")
 embedding_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+print("✅ Эмбеддинг Модель успешно подключена!")
+
 
 csv_path = "./app/faq.csv"
-
 texts = []
 metadatas = []
 with open(csv_path, "r", encoding="utf-8") as f:
@@ -27,10 +29,13 @@ with open(csv_path, "r", encoding="utf-8") as f:
             texts.append(question)
             metadatas.append({"answer": answer})
 
+
 if os.path.exists(CHROMA_PERSIST_DIRECTORY):
     if os.path.isdir(CHROMA_PERSIST_DIRECTORY):
         shutil.rmtree(CHROMA_PERSIST_DIRECTORY)
 
+
+print("🔃 Создание Базы Знаний")
 vector_store = Chroma.from_texts(
     texts=texts,
     embedding=embedding_model,
@@ -41,5 +46,4 @@ vector_store = Chroma.from_texts(
 
 if os.path.exists(CHROMA_FILE):
     shutil.copy(CHROMA_FILE, "./app/faq.db")
-
-print("✅ База знаний успешно создана: faq.db (SQLite)")
+print("✅ База Знаний успешно создана: faq.db (SQLite)")
