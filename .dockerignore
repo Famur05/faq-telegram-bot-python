@@ -9,5 +9,5 @@ docker-compose.yml
 .gitignore
 .git
 .idea/
-./app/croma_db
+app/chroma_db/
 *.db
