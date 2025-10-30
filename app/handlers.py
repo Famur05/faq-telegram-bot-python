@@ -7,6 +7,7 @@ from app.vector_store import search_faq
 
 router = Router()
 
+
 @router.message(Command("start"))
 async def cmd_start(message: Message):
     await message.answer(
@@ -36,7 +37,7 @@ async def cmd_faq(message: Message):
     """Handle /faq command."""
     parts: list[str] = message.text.split(maxsplit=1)
     query: str = parts[1].strip() if len(parts) > 1 else ""
-    
+
     if not query:
         await message.answer(
             "Использование: /faq <запрос>\n"
@@ -47,23 +48,21 @@ async def cmd_faq(message: Message):
             "• /faq Кто разработал этого telegram-бота?"
         )
         return
-    
+
     results: list[tuple[str, str]] = await asyncio.to_thread(search_faq, query)
-    
+
     if not results:
         await message.answer(f"🤷 Не найдено подходящего ответа для запроса: {query}")
         return
-    
+
     response = f"📚 Результат поиска для: '{query}'\n\n"
     response += f"❓ Похожий вопрос: {results[0][0]}\n"
     response += f"💬 Ответ: {results[0][1]}"
-    
+
     await message.answer(response)
 
 
 @router.message(F.text)
 async def echo_handler(message: Message):
     user_text = message.text
-    await message.answer(
-        f"Эхо: {user_text}"
-    )
+    await message.answer(f"Эхо: {user_text}")
