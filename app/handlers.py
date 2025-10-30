@@ -34,7 +34,6 @@ async def cmd_start(message: Message):
 
 @router.message(Command("faq"))
 async def cmd_faq(message: Message):
-    """Handle /faq command."""
     parts: list[str] = message.text.split(maxsplit=1)
     query: str = parts[1].strip() if len(parts) > 1 else ""
 
@@ -42,10 +41,10 @@ async def cmd_faq(message: Message):
         await message.answer(
             "Использование: /faq <запрос>\n"
             "Примеры:\n"
-            "• /faq Где находятся офисы компании?\n"
-            "• /faq Каков опыт компании на рынке?\n"
-            "• /faq Где находится офис в Дубае?\n"
-            "• /faq Кто разработал этого telegram-бота?"
+            "• /faq В каких странах есть офисы вашей компании?\n"
+            "• /faq Как долго вы работаете на рынке?\n"
+            "• /faq Подскажите, пожалуйста, где именно находится ваш офис в Дубае?\n"
+            "• /faq Кто разработчик этого telegram-бота?"
         )
         return
 
